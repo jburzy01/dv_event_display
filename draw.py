@@ -2,30 +2,28 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class trk:
-  pt  = 0.0
-  eta = 0.0
-  phi = 0.0
-  m   = 0.0
+  px  = 0.0
+  py  = 0.0
 
 def draw_event():
 
   fig, ax = plt.subplots(1)
   draw_detector(fig,ax)
   draw_vertex(fig,ax,0,0)
-  trks = True;
+  trk1 = trk()
+  trk2 = trk()
+  trk1.px = 10
+  trk1.py = -50
+  trk2.px = 15
+  trk2.py = -55
+  trks = [trk1,trk2]
   draw_vertex(fig,ax,10,-50,trks,25,'blue')
   plt.show()
 
-def draw_vertex(fig,ax,x,y,trks=False,size=25,color='black'):
+def draw_vertex(fig,ax,x,y,trks=[],size=25,color='black'):
   plt.scatter(x,y,size,color=color)
-  if trks:
-    point1 = [x,y]
-    point2 = [x+50,y+50]
-
-    x_values = [point1[0], point2[0]]
-    y_values = [point1[1], point2[1]]
-
-    plt.plot(x_values,y_values,color=color)
+  for trk in trks:
+    ax.arrow(x,y,300*trk.px,300*trk.py, head_width=0.0, head_length=0.7, fc='lightblue', ec='black')
 
 def draw_detector(fig,ax):
 
